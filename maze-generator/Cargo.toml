@@ -4,7 +4,12 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+getrandom = { version = "0.2.15", features = ["js"] }
 image = { version = "0.25.5", default-features = false, features = ["png"] }
 irrgarten = "0.1.1"
 rand = "0.8.5"
 thiserror = "2.0.4"
+wasm-bindgen = "0.2.97"
+
+[lib]
+crate-type = ["cdylib", "rlib"]

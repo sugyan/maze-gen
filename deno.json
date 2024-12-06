@@ -1,0 +1,14 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-net --allow-read --watch main.ts",
+    "build": "wasm-pack build --release --target deno maze-generator"
+  },
+  "imports": {},
+  "exclude": [
+    "./maze-generator/target",
+    "./.git"
+  ],
+  "deploy": {
+    "entrypoint": "main.ts"
+  }
+}

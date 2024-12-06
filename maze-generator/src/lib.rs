@@ -3,6 +3,7 @@ use irrgarten::{Maze, MazeGenerationError};
 use rand::rngs::ThreadRng;
 use std::io::Cursor;
 use thiserror::Error;
+use wasm_bindgen::prelude::wasm_bindgen;
 
 const CELL_SIZE: usize = 15;
 const WALL_SIZE: usize = 2;
@@ -46,4 +47,13 @@ pub fn generate(w: usize, h: usize) -> Result<Vec<u8>, Error> {
     let mut bytes: Vec<u8> = Vec::new();
     image.write_to(&mut Cursor::new(&mut bytes), ImageFormat::Png)?;
     Ok(bytes)
+}
+
+#[cfg(target_arch = "wasm32")]
+use wasm_bindgen::JsError;
+
+#[cfg(target_arch = "wasm32")]
+#[wasm_bindgen]
+pub fn generate_wasm(w: usize, h: usize) -> Result<Vec<u8>, JsError> {
+    Ok(generate(w, h)?)
 }
